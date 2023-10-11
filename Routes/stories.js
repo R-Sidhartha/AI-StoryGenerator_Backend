@@ -6,7 +6,7 @@ const fetchuser = require('../middleware/fetchuser'); // Import the fetchuser mi
 // Get all stories
 router.get('/stories', fetchuser, async (req, res) => {
     try {
-      const stories = await Story.find({ user: req.user.id }).populate('prompt');
+      const stories = await Story.find({ user: req.user.id }).sort({ date: -1 }).populate('prompt');
       res.json(stories);
     } catch (error) {
       console.error(error);
@@ -18,7 +18,7 @@ router.get('/stories', fetchuser, async (req, res) => {
   router.get('/stories/:id', fetchuser, async (req, res) => {
     const { id } = req.params;
     try {
-      const story = await Story.findOne({ _id: id, user: req.user.id }).populate('prompt');
+      const story = await Story.findOne({ _id: id, user: req.user.id }).sort({ date: -1 }).populate('prompt');
       if (!story) {
         return res.status(404).json({ error: 'Story not found' });
       }

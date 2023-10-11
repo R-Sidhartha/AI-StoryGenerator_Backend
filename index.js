@@ -14,7 +14,7 @@ app.use(express.json())
 app.use('/api/auth', require('./Routes/auth'))
 app.use('/api/story', require('./Routes/stories'))
 app.use('/api/posts', require('./Routes/posts'))
-app.use('/api/upvotes', require('./Routes/upvotes'))
+app.use('/api/votes', require('./Routes/votes'))
 
 app.listen(port, () => {
   console.log(`AI-StoryGenerator app listening on port ${port}`)

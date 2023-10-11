@@ -62,6 +62,9 @@ const postSchema = new mongoose.Schema({
   upvotes: {
     type: Number,
   },
+  downvotes: {
+    type: Number,
+  },
   votes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Vote',
@@ -84,6 +87,10 @@ const voteSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  type:{
+    type: String,
+    required:true
+  }
 });
 
 // Create models based on the schemas

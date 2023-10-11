@@ -43,13 +43,15 @@ router.get('/userposts/:userId', async (req, res) => {
     }
 
     // Fetch posts associated with the specified user ID
-    const userPosts = await Post.find({ user: userId }).populate('user', 'UserName');
+    const userPosts = await Post.find({ user: userId }).sort({ date: -1 })
+    .populate('user', 'UserName');
 
     res.json(userPosts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
+  
 });
 
 
@@ -71,7 +73,9 @@ router.delete('/deletepost/:id',fetchuser, async (req, res) => {
   // Fetch all posts
 router.get('/allposts', async (req, res) => {
     try {
-      const allPosts = await Post.find().populate('user', ['name', 'username']); // Replace with the fields you want to populate
+      const allPosts = await Post.find()
+      .sort({ date: -1 }) // Sort by date in descending order (newest first)
+      .populate('user', ['name', 'username']); // Replace with the fields you want to populate
   
       res.json(allPosts);
     } catch (error) {
