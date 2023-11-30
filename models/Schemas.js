@@ -40,6 +40,10 @@ const storySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date:{
+    type:Date,
+    default: Date.now
+ } 
 });
 // Define post Schema
 const postSchema = new mongoose.Schema({
